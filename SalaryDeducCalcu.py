@@ -1,11 +1,12 @@
-def compute_deductions(salary):
-    Calculate_SSS = 1200
-    Calculate_Philhealth = (salary * 0.05) / 2
-    Calculate_pagibig = 100
-    Calculate_tax = 1875 # Assuming fixed value for simplicity
-    Computed_Deductions = Calculate_SSS + Calculate_Philhealth + Calculate_pagibig + Calculate_tax
-    Net_Salary = salary - Computed_Deductions
-    
+class SalaryDeductionCalculator:
+    def __init__(self, salary):
+      
+        self.salary = salary
+        self.sss_rate = 0.05  # 5% of salary
+        self.philhealth_rate = 0.05  # 5% of salary
+        self.pagibig_deduction = 100  # Fixed Pag-IBIG deduction
+        self.tax_deduction = 1875  # Fixed tax deduction
+
     print("Gross Salary:", salary)
     print("SSS Deduction:", Calculate_SSS)
     print("PhilHealth Deduction:", Calculate_Philhealth)
@@ -14,5 +15,22 @@ def compute_deductions(salary):
     print("Total Deductions:", Computed_Deductions)
     print("Net Salary:", Net_Salary)
 
-salary = float(input("Enter your monthly salary: "))
-compute_deductions(salary)
+def main():
+    
+    print("Welcome to the Salary Deduction Calculator!")
+
+    # Get valid salary input using the InputValidator class
+    salary = InputValidator.get_valid_salary_input()  # **Tester & Documenter (Input Validation)**
+
+    # Instantiate the SalaryDeductionCalculator with the user input salary
+    calculator = SalaryDeductionCalculator(salary)  # **Lead Developer (OOP)**
+
+    # Compute deductions and net salary using the calculator
+    results = calculator.compute_deductions()  # **Lead Developer (OOP, Modular Function)**
+
+    # Display the results of the deductions and net salary
+    calculator.display_results(results)  # **Refactoring Specialist (Improved Readability)**
+
+
+if __name__ == "__main__":
+    main()  # **Lead Developer (Program Execution)**
