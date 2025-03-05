@@ -7,13 +7,44 @@ class SalaryDeductionCalculator:
         self.pagibig_deduction = 100  # Fixed Pag-IBIG deduction
         self.tax_deduction = 1875  # Fixed tax deduction
 
-    print("Gross Salary:", salary)
-    print("SSS Deduction:", Calculate_SSS)
-    print("PhilHealth Deduction:", Calculate_Philhealth)
-    print("Pag-IBIG Deduction:", Calculate_pagibig)
-    print("Tax Deduction:", Calculate_tax)
-    print("Total Deductions:", Computed_Deductions)
-    print("Net Salary:", Net_Salary)
+    def calculate_sss_deduction(self):
+        """Calculate the SSS deduction."""
+        return self.salary * self.sss_rate  # **Lead Developer (Modular Function)**
+
+    def calculate_philhealth_deduction(self):
+        """Calculate the PhilHealth deduction."""
+        return (self.salary * self.philhealth_rate) / 2  # **Lead Developer (Modular Function)**
+
+    def calculate_pagibig_deduction(self):
+        """Return the fixed Pag-IBIG deduction."""
+        return self.pagibig_deduction  # **Lead Developer (Modular Function)**
+
+    def calculate_tax_deduction(self):
+        """Return the fixed tax deduction."""
+        return self.tax_deduction  # **Lead Developer (Modular Function)**
+
+    def compute_deductions(self):
+        # Calls modular functions to calculate deductions
+        sss_deduction = self.calculate_sss_deduction()
+        philhealth_deduction = self.calculate_philhealth_deduction()
+        pagibig_deduction = self.calculate_pagibig_deduction()
+        tax_deduction = self.calculate_tax_deduction()
+
+        # Total deductions and net salary calculation
+        total_deductions = sss_deduction + philhealth_deduction + pagibig_deduction + tax_deduction
+        net_salary = self.salary - total_deductions
+
+        # Return all deductions and net salary
+        return {
+            "gross_salary": self.salary,
+            "sss_deduction": sss_deduction,
+            "philhealth_deduction": philhealth_deduction,
+            "pagibig_deduction": pagibig_deduction,
+            "tax_deduction": tax_deduction,
+            "total_deductions": total_deductions,
+            "net_salary": net_salary
+        }
+
 
 def main():
     
