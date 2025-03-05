@@ -52,14 +52,28 @@ class SalaryDeductionCalculator:
             "total_deductions": total_deductions,
             "net_salary": net_salary
         }
-
+class InputValidator:
+    @staticmethod
+    def get_valid_salary_input():
+        while True:
+            try:
+                # Requesting user input
+                salary_input = float(input("Enter your monthly salary: "))
+               
+                # Validation: check for positive salary
+                if salary_input <= 0:
+                    raise ValueError("Salary must be a positive value greater than zero.")
+                return salary_input  # Return valid salary input
+            except ValueError as e:
+                # Error handling for invalid input
+                print(f"Invalid input: {e}. Please try again.") 
 
 def main():
     print("Welcome to the Salary Deduction Calculator!") 
 
     calculator = SalaryDeductionCalculator(salary)
     results = calculator.compute_deductions() 
-    
+    salary = InputValidator.get_valid_salary_input() 
 
 
 if __name__ == "__main__":
