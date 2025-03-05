@@ -1,27 +1,35 @@
 class SalaryDeductionCalculator:
     def __init__(self, salary):
-      
+
         self.salary = salary
         self.sss_rate = 0.05  # 5% of salary
         self.philhealth_rate = 0.05  # 5% of salary
         self.pagibig_deduction = 100  # Fixed Pag-IBIG deduction
-        self.tax_deduction = 1875  # Fixed tax deduction
+        self.tax_deduction = 0  # Tax deduction will be calculated dynamically
 
     def calculate_sss_deduction(self):
-        """Calculate the SSS deduction."""
-        return self.salary * self.sss_rate  # **Lead Developer (Modular Function)**
+        """Calculate the SSS deduction (5% of salary)."""
+        return self.salary * self.sss_rate  
 
     def calculate_philhealth_deduction(self):
-        """Calculate the PhilHealth deduction."""
-        return (self.salary * self.philhealth_rate) / 2  # **Lead Developer (Modular Function)**
+        """Calculate the PhilHealth deduction (50% of 5% of salary)."""
+        return (self.salary * self.philhealth_rate) / 2  
 
     def calculate_pagibig_deduction(self):
-        """Return the fixed Pag-IBIG deduction."""
-        return self.pagibig_deduction  # **Lead Developer (Modular Function)**
+        """Return the fixed Pag-IBIG deduction (100)."""
+        return self.pagibig_deduction 
 
     def calculate_tax_deduction(self):
-        """Return the fixed tax deduction."""
-        return self.tax_deduction  # **Lead Developer (Modular Function)**
+        """Calculate the tax deduction based on salary income brackets."""
+        salary = self.salary
+        if salary <= 250000:
+            return 0  # No tax for income <= 250,000
+        elif salary <= 400000:
+            return (salary - 250000) * 0.20  # 20% for income between 250,001 to 400,000
+        elif salary <= 800000:
+            return (salary - 400000) * 0.25 + 30000  # 25% for income between 400,001 to 800,000
+        else:
+            return (salary - 800000) * 0.30 + 125000  # 30% for income above 800,000
 
     def compute_deductions(self):
         # Calls modular functions to calculate deductions
@@ -47,21 +55,12 @@ class SalaryDeductionCalculator:
 
 
 def main():
+    print("Welcome to the Salary Deduction Calculator!") 
+
+    calculator = SalaryDeductionCalculator(salary)
+    results = calculator.compute_deductions() 
     
-    print("Welcome to the Salary Deduction Calculator!")
-
-    # Get valid salary input using the InputValidator class
-    salary = InputValidator.get_valid_salary_input()  # **Tester & Documenter (Input Validation)**
-
-    # Instantiate the SalaryDeductionCalculator with the user input salary
-    calculator = SalaryDeductionCalculator(salary)  # **Lead Developer (OOP)**
-
-    # Compute deductions and net salary using the calculator
-    results = calculator.compute_deductions()  # **Lead Developer (OOP, Modular Function)**
-
-    # Display the results of the deductions and net salary
-    calculator.display_results(results)  # **Refactoring Specialist (Improved Readability)**
 
 
 if __name__ == "__main__":
-    main()  # **Lead Developer (Program Execution)**
+    main()  
